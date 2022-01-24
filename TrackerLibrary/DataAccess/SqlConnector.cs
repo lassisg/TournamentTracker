@@ -1,10 +1,12 @@
-﻿namespace TrackerLibrary
+﻿using TrackerLibrary.Models;
+
+namespace TrackerLibrary.DataAccess
 {
-    public class TextConnector : IDataConnection
+    public class SqlConnector : IDataConnection
     {
-        // TODO: Make the CreatePrize method actually save to a file
+        // TODO: Make the CreatePrize method actually save to the database
         /// <summary>
-        /// Saves a prize to a file.
+        /// Saves a prize to the database.
         /// </summary>
         /// <param name="prize">The prize information.</param>
         /// <returns>The prize information, including the unique identifier.</returns>
