@@ -2,6 +2,10 @@
 
 In this course, we will Develop na App to manage a tournament.
 
+It's important to note that this course was made using .NET Framework and Visual Studio 2017, while I'm following using .NET 6 and Visual Studio 2022. That means I might need to change some aspects during the development process.
+
+The same goes for SQL Server. While the course uses SQL Server 2017 Developer Edition, I'm using SQL Server 2019 Developer Edition.
+
 ## 1. Planning Step 1 - Initial Planning
 
 **MISTAKE #1**: Start coding before understanding deeper
@@ -176,5 +180,11 @@ In this step we go through the Windows Forms and plan what each action should do
 ## 6. Programming Step 1 - Classe Library Creation
 
 ## 7. Programming Step 2 - Form Building
+
+## 8. Programming Step 3 - SQL Database Design
+
+![SQL Database Design](SQL_Database_Design.png)
+
+## 9. Programming Step 4 - Prize Form Wire Up
 
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
