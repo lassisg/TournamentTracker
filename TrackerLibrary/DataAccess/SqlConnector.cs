@@ -1,4 +1,6 @@
-﻿using TrackerLibrary.Models;
+﻿using Dapper;
+using System.Data;
+using TrackerLibrary.Models;
 
 namespace TrackerLibrary.DataAccess
 {
@@ -8,13 +10,25 @@ namespace TrackerLibrary.DataAccess
         /// <summary>
         /// Saves a prize to the database.
         /// </summary>
-        /// <param name="prize">The prize information.</param>
+        /// <param name="model">The prize information.</param>
         /// <returns>The prize information, including the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel prize)
+        public PrizeModel CreatePrize(PrizeModel model)
         {
-            prize.Id = 1;
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                var p = new DynamicParameters();
+                p.Add("@PlaceNumber", model.PlaceNumber);
+                p.Add("@PlaceName", model.PlaceName);
+                p.Add("@PrizeAmount", model.PrizeAmount);
+                p.Add("@PrizePercentage", model.PrizePercentage);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-            return prize;
+                connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
+
+                return model;
+            }
         }
     }
 }

@@ -8,13 +8,13 @@ namespace TrackerLibrary.DataAccess
         /// <summary>
         /// Saves a prize to a file.
         /// </summary>
-        /// <param name="prize">The prize information.</param>
+        /// <param name="model">The prize information.</param>
         /// <returns>The prize information, including the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel prize)
+        public PrizeModel CreatePrize(PrizeModel model)
         {
-            prize.Id = 1;
+            model.Id = 1;
 
-            return prize;
+            return model;
         }
     }
 }
