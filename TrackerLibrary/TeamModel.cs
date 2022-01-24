@@ -1,16 +1,19 @@
-﻿/// <summary>
-/// Represents a team in the tournament.
-/// </summary>
-public class TeamModel
+﻿namespace TrackerLibrary
 {
     /// <summary>
-    /// The members of the team.
+    /// Represents a team in the tournament.
     /// </summary>
-    public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
+    public class TeamModel
+    {
+        /// <summary>
+        /// The members of the team.
+        /// </summary>
+        public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
 
-    /// <summary>
-    /// The name of the team.
-    /// </summary>
-    public string TeamName { get; set; }
+        /// <summary>
+        /// The name of the team.
+        /// </summary>
+        public string TeamName { get; set; }
 
+    }
 }

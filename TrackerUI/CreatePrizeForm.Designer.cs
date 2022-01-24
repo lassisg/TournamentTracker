@@ -94,6 +94,7 @@
             this.prizeAmountText.Name = "prizeAmountText";
             this.prizeAmountText.Size = new System.Drawing.Size(292, 43);
             this.prizeAmountText.TabIndex = 20;
+            this.prizeAmountText.Text = "0";
             // 
             // prizeAmountLabel
             // 
@@ -112,6 +113,7 @@
             this.prizePercentageText.Name = "prizePercentageText";
             this.prizePercentageText.Size = new System.Drawing.Size(292, 43);
             this.prizePercentageText.TabIndex = 22;
+            this.prizePercentageText.Text = "0";
             // 
             // prizePercentageLabel
             // 
@@ -149,6 +151,7 @@
             this.createPrizeButton.TabIndex = 27;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // CreatePrizeForm
             // 
@@ -169,7 +172,7 @@
             this.Controls.Add(this.headerLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CreatePrizeForm";
             this.Text = "Create Prize";
             this.ResumeLayout(false);
