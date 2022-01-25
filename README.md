@@ -189,4 +189,6 @@ In this step we go through the Windows Forms and plan what each action should do
 
 ## 10. Programming Step 5 - SQL Connection
 
+## 11. Programming Step 6 - Text Connection
+
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
