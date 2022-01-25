@@ -177,20 +177,34 @@ In this step we go through the Windows Forms and plan what each action should do
 
 | We realized that the Create Team window is missing a Delete button to delete a member.
 
-## 6. Programming Step 1 - Classe Library Creation
+## 6. Programming Step 1 - Class Library Creation
+
+In this step we created the class library according to our design from "Planning Step 3 - Data Design".
 
 ## 7. Programming Step 2 - Form Building
 
+In this step we actually build the forms designed before.
+
 ## 8. Programming Step 3 - SQL Database Design
+
+In this step we create all the tables and some stored procedures for later use.
 
 ![SQL Database Design](SQL_Database_Design.png)
 
 ## 9. Programming Step 4 - Prize Form Wire Up
 
+In this step we create all the logic related to the Prize form.
+
 ## 10. Programming Step 5 - SQL Connection
+
+Here we add all the needed libraries and configurations for the database connection. We also added a new stored procedure to insert data in the Prizes table.
 
 ## 11. Programming Step 6 - Text Connection
 
+Here we add the ability to read and save to a text file.
+
 ## 12. Programming Step 7 - Create Team Form Part 1 (Create Person)
+
+In this step, we added the logic to create new person in both a database and text file, as we've done before for the prize.
 
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
