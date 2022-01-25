@@ -191,4 +191,6 @@ In this step we go through the Windows Forms and plan what each action should do
 
 ## 11. Programming Step 6 - Text Connection
 
+## 12. Programming Step 7 - Create Team Form Part 1 (Create Person)
+
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
