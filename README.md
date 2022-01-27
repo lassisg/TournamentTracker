@@ -203,16 +203,24 @@ Here we add all the needed libraries and configurations for the database connect
 
 Here we add the ability to read and save to a text file.
 
-## 12. Programming Step 7 - Create Team Form Part 1 (Create Person)
+## 12. Programming Step 7 - Team Form Wire Up Part 1 (Create Person)
 
 In this step, we added the logic to create new person in both a database and text file, as we've done before for the prize.
 
-## 13. Programming Step 8 - Create Team Form Part 2 (Create Team)
+## 13. Programming Step 8 - Team Form Wire Up Part 2 (Create Team)
 
 In this step, we added the code for adding and removing person to the team in both a database and text file.
 
-## 14. Programming Step 9 - Create Team Form Part 3 (Create Team)
+## 14. Programming Step 9 - Team Form Wire Up Part 3 (Create Team)
 
 In this step, we added the code for adding a team (and its team members) to both a database and text file.
+
+## 15. Programming Step 10 - Tournament Form Wire Up Part 1 (Add Team)
+
+In this step, we added the code for adding a team (and its team members) to a database.
+
+## 16. Programming Step 11 - Tournament Form Wire Up Part 2 (Add Prize)
+
+In this step, we added the code for adding a prize to a database. Then we added tha capabilities to add teams (and its members) and prizes to a text file.
 
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi

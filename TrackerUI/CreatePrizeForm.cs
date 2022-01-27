@@ -15,9 +15,13 @@ namespace TrackerUI
 {
     public partial class CreatePrizeForm : Form
     {
-        public CreatePrizeForm()
+        private IPrizeRequester callingForm;
+
+        public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
         }
 
         private void createPrizeButton_Click(object sender, EventArgs e)
@@ -32,10 +36,14 @@ namespace TrackerUI
 
                 GlobalConfig.Connection.CreatePrize(model);
 
-                placeNameText.Text = "";
-                placeNumberText.Text = "";
-                prizeAmountText.Text = "0";
-                prizePercentageText.Text = "0";
+                callingForm.PrizeComplete(model);
+                
+                this.Close();
+
+                //placeNameText.Text = "";
+                //placeNumberText.Text = "";
+                //prizeAmountText.Text = "0";
+                //prizePercentageText.Text = "0";
             }
             else
             {

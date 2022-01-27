@@ -91,6 +91,8 @@ namespace TrackerLibrary.DataAccess.TextHelpers
                 {
                     team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());
                 }
+
+                output.Add(team);
             }
 
             return output;
