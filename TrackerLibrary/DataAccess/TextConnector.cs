@@ -11,7 +11,7 @@ namespace TrackerLibrary.DataAccess
         public PersonModel CreatePerson(PersonModel model)
         {
             // Load the text fileand convert the text to List<PrizeModel>
-            List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+            List<PersonModel> people = GetPerson_All();
 
             // Find the last ID
             int currentId = 1;
@@ -57,6 +57,11 @@ namespace TrackerLibrary.DataAccess
             prizes.SaveToPrizeFile(PrizesFile);
 
             return model;
+        }
+
+        public List<PersonModel> GetPerson_All()
+        {
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
         }
     }
 }

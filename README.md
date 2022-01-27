@@ -207,4 +207,8 @@ Here we add the ability to read and save to a text file.
 
 In this step, we added the logic to create new person in both a database and text file, as we've done before for the prize.
 
+## 13. Programming Step 8 - Create Team Form Part 2 (Create Team)
+
+In this step, we added the code for adding and removing person to the team in both a database and text file.
+
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
