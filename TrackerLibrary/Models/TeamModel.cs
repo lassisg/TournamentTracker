@@ -6,14 +6,19 @@
     public class TeamModel
     {
         /// <summary>
-        /// The members of the team.
+        /// The unique identifier for the team.
         /// </summary>
-        public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
+        public int Id { get; set; }
 
         /// <summary>
         /// The name of the team.
         /// </summary>
         public string TeamName { get; set; }
+
+        /// <summary>
+        /// The members of the team.
+        /// </summary>
+        public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
 
     }
 }
