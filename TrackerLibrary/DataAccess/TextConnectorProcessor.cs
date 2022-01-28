@@ -98,6 +98,47 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             return output;
         }
 
+        public static List<TournamentModel> ConvertToTournamentModels (
+            this List<string> lines, 
+            string teamFileName, 
+            string peopleFileName,
+            string prizesFileName)
+        {
+            // id, TournamentName, EntryFee, Entered Teams - id|id|id, Prizes - id|id|id, Rounds - id-id-id|id-id-id|id-id-id
+            List<TournamentModel> output = new List<TournamentModel>();
+            List<TeamModel> teams = teamFileName.FullFilePath().LoadFile().ConvertToTeamModels(peopleFileName);
+            List<PersonModel> people = peopleFileName.FullFilePath().LoadFile().ConvertToPersonModels();
+            List<PrizeModel> prizes = prizesFileName.FullFilePath().LoadFile().ConvertToPrizeModels();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(',');
+
+                TournamentModel tournament = new TournamentModel();
+
+                tournament.Id = int.Parse(cols[0]);
+                tournament.TournamentName = cols[1];
+                tournament.EntryFee = decimal.Parse(cols[2]);
+                
+                string[] teamIds = cols[3].Split('|');
+                foreach(string id in teamIds)
+                {
+                    tournament.EnteredTeams.Add(teams.Where(x => x.Id == int.Parse(id)).First());
+                }
+
+                string[] prizeIds = cols[4].Split('|');
+                foreach (string id in prizeIds)
+                {
+                    tournament.Prizes.Add(prizes.Where(x => x.Id == int.Parse(id)).First());
+                }
+
+                // TODO: Capture Rounds information
+
+            }
+
+            return output;
+        }
+
         public static void SaveToPrizeFile(this List<PrizeModel> models, string fileName)
         {
             List<string> lines = new List<string>();
@@ -134,6 +175,99 @@ namespace TrackerLibrary.DataAccess.TextHelpers
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
 
+        public static void SaveToTournamentFile(this List<TournamentModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+            // id, TournamentName, EntryFee, Entered Teams - id|id|id, Prizes - id|id|id, Rounds - id-id-id|id-id-id|id-id-id
+            foreach (TournamentModel tm in models)
+            {
+                lines.Add($@"{ tm.Id },
+                    { tm.TournamentName },
+                    { tm.EntryFee },
+                    { ConvertTeamListToString(tm.EnteredTeams) },
+                    { ConvertPrizeListToString(tm.Prizes) },
+                    { ConvertRoundsListToString(tm.Rounds) }");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
+
+        public static string ConvertRoundsListToString(List<List<MatchupModel>> rounds)
+        {
+            string output = "";
+
+            if (rounds.Count == 0)
+            {
+                return output;
+            }
+
+            foreach (List<MatchupModel> round in rounds)
+            {
+                output += $"{ ConvertMatchupListToString(round) }|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+        
+        private static string ConvertMatchupListToString(List<MatchupModel> matchups)
+        {
+            string output = "";
+
+            if (matchups.Count == 0)
+            {
+                return output;
+            }
+
+            foreach (MatchupModel matchup in matchups)
+            {
+                output += $"{ matchup.Id }-";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+
+        private static string ConvertTeamListToString(List<TeamModel> teams)
+        {
+            string output = "";
+
+            if (teams.Count == 0)
+            {
+                return output;
+            }
+
+            foreach (TeamModel team in teams)
+            {
+                output += $"{ team.Id }|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+
+        private static string ConvertPrizeListToString(List<PrizeModel> prizes)
+        {
+            string output = "";
+
+            if (prizes.Count == 0)
+            {
+                return output;
+            }
+
+            foreach (PrizeModel prize in prizes)
+            {
+                output += $"{ prize.Id }|";
+            }
+
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
+        
         private static string ConvertPeopleListToString(List<PersonModel> people)
         {
             string output = "";
@@ -152,5 +286,6 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
             return output;
         }
+
     }
 }

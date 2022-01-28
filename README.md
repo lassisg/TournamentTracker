@@ -223,4 +223,10 @@ In this step, we added the code for adding a team (and its team members) to a da
 
 In this step, we added the code for adding a prize to a database. Then we added tha capabilities to add teams (and its members) and prizes to a text file.
 
+## 17. Programming Step 12 - Tournament Form Wire Up Part 3 (Create Tournament)
+
+In this step, we added most of the code for creating a tournament.
+
+
+In this step, we added the code for creating a tournament.
 [1]: https://www.youtube.com/watch?v=YF-3SpIGkYM&list=PLLWMQd6PeGY3t63w-8MMIjIyYS7MsFcCi
