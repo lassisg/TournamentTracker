@@ -130,11 +130,11 @@ namespace TrackerUI
 
             tournament.TournamentName = tournamentNameText.Text;
             tournament.EntryFee = entryFee;
-
             tournament.Prizes = selectedPrizes;
             tournament.EnteredTeams = selectedTeams;
 
-            // TODO: Wire our matchups
+            // Wire our matchups
+            TournamentLogic.CreateRounds(tournament);
 
             // Create Tournamaent entry
             // Create all of the prizes entries

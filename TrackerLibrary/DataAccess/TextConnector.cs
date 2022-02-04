@@ -5,10 +5,13 @@ namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {
+        // TODO: Remove consts below
         private const string PrizesFile = "PrizeModels.csv";
         private const string PeopleFile = "PersonModels.csv";
         private const string TeamsFile = "TeamModels.csv";
         private const string TournamentsFile = "TournamentModel.csv";
+        private const string MatchupsFile = "MatchupModel.csv";
+        private const string MatchupEntriesFile = "MatchupEntryModel.csv";
 
         public void CreatePerson(PersonModel model)
         {
@@ -102,10 +105,10 @@ namespace TrackerLibrary.DataAccess
 
             tournament.Id = currentId;
 
-            // Add new record with the new ID (last Id + 1)
+            tournament.SaveRoundsToFile(MatchupsFile, MatchupEntriesFile);
+
             tournaments.Add(tournament);
 
-            // Convert the people to List<string> and save to the text file
             tournaments.SaveToTournamentFile(TournamentsFile);
 
         }

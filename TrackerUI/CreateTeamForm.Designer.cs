@@ -290,6 +290,7 @@
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CreateTeamForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Team";
             this.addNewMemberGroupBox.ResumeLayout(false);
             this.addNewMemberGroupBox.PerformLayout();

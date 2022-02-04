@@ -48,7 +48,7 @@
             this.headerLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.headerLabel.Location = new System.Drawing.Point(12, 9);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(205, 46);
+            this.headerLabel.Size = new System.Drawing.Size(200, 45);
             this.headerLabel.TabIndex = 14;
             this.headerLabel.Text = "Create Prize";
             // 
@@ -178,6 +178,7 @@
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "CreatePrizeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Prize";
             this.ResumeLayout(false);
             this.PerformLayout();
