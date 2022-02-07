@@ -42,7 +42,7 @@
             this.headerLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.headerLabel.Location = new System.Drawing.Point(218, 21);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(384, 46);
+            this.headerLabel.Size = new System.Drawing.Size(372, 45);
             this.headerLabel.TabIndex = 15;
             this.headerLabel.Text = "Tournament Dashboard";
             // 
@@ -94,6 +94,7 @@
             this.createTournamentButton.TabIndex = 29;
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
+            this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
             // 
             // TournamentDashboardForm
             // 
