@@ -51,7 +51,7 @@
             this.headerLabel.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.headerLabel.Location = new System.Drawing.Point(12, 9);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(215, 46);
+            this.headerLabel.Size = new System.Drawing.Size(208, 45);
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "Tournament:";
             // 
@@ -62,7 +62,7 @@
             this.tournamentName.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.tournamentName.Location = new System.Drawing.Point(256, 9);
             this.tournamentName.Name = "tournamentName";
-            this.tournamentName.Size = new System.Drawing.Size(146, 46);
+            this.tournamentName.Size = new System.Drawing.Size(142, 45);
             this.tournamentName.TabIndex = 1;
             this.tournamentName.Text = "<none>";
             // 
@@ -84,6 +84,7 @@
             this.roundDropDown.Name = "roundDropDown";
             this.roundDropDown.Size = new System.Drawing.Size(257, 45);
             this.roundDropDown.TabIndex = 3;
+            this.roundDropDown.SelectedIndexChanged += new System.EventHandler(this.roundDropDown_SelectedIndexChanged);
             // 
             // unplayedOnlyCheckbox
             // 
@@ -107,6 +108,7 @@
             this.matchupListBox.Name = "matchupListBox";
             this.matchupListBox.Size = new System.Drawing.Size(377, 335);
             this.matchupListBox.TabIndex = 5;
+            this.matchupListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
             // 
             // teamOneName
             // 
