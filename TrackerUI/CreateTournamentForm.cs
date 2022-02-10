@@ -43,12 +43,12 @@ namespace TrackerUI
 
         private void addTeamButton_Click(object sender, EventArgs e)
         {
-            TeamModel team = (TeamModel)selectTeamDropDown.SelectedItem;
+            TeamModel t = (TeamModel)selectTeamDropDown.SelectedItem;
 
-            if (team != null)
+            if (t != null)
             {
-                availableTeams.Remove(team);
-                selectedTeams.Add(team);
+                availableTeams.Remove(t);
+                selectedTeams.Add(t);
 
                 WireUpLists();
             }
@@ -56,12 +56,12 @@ namespace TrackerUI
 
         private void removeSelectedPlayerButton_Click(object sender, EventArgs e)
         {
-            TeamModel team = (TeamModel)tournamentTeamsListBox.SelectedItem;
+            TeamModel t = (TeamModel)tournamentTeamsListBox.SelectedItem;
 
-            if (team != null)
+            if (t != null)
             {
-                selectedTeams.Remove(team);
-                availableTeams.Add(team);
+                selectedTeams.Remove(t);
+                availableTeams.Add(t);
 
                 WireUpLists();
             }
@@ -74,11 +74,11 @@ namespace TrackerUI
             frm.Show();
         }
 
-        public void PrizeComplete(PrizeModel prize)
+        public void PrizeComplete(PrizeModel model)
         {
             // Get back from the form with PrizeModel
             // Take the PrizeModel and put it into our list os selected prizes
-            selectedPrizes.Add(prize);
+            selectedPrizes.Add(model);
             WireUpLists();
         }
 
@@ -89,21 +89,21 @@ namespace TrackerUI
             frm.Show();
         }
 
-        public void TeamComplete(TeamModel team)
+        public void TeamComplete(TeamModel model)
         {
             // Get back from the form with TeamModel
             // Take the TeamModel and put it into our list os selected prizes
-            selectedTeams.Add(team);
+            selectedTeams.Add(model);
             WireUpLists();
         }
 
         private void removeSelectedPrizeButton_Click(object sender, EventArgs e)
         {
-            PrizeModel prize = (PrizeModel)prizesListBox.SelectedItem;
+            PrizeModel p = (PrizeModel)prizesListBox.SelectedItem;
 
-            if (prize != null)
+            if (p != null)
             {
-                selectedPrizes.Remove(prize);
+                selectedPrizes.Remove(p);
 
                 WireUpLists();
             }
@@ -112,12 +112,12 @@ namespace TrackerUI
         private void createTournamentButton_Click(object sender, EventArgs e)
         {
             // Validate data
-            decimal entryFee = 0;
-            bool feeAcceptable = decimal.TryParse(entryFeeText.Text, out entryFee);
+            bool feeAcceptable = decimal.TryParse(entryFeeText.Text, out decimal entryFee);
 
             if (!feeAcceptable)
             {
-                MessageBox.Show("You need to anter a valid Entry Fee.", 
+                MessageBox.Show(
+                    "You need to anter a valid Entry Fee.", 
                     "Invalid Fee", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
@@ -126,21 +126,25 @@ namespace TrackerUI
             }
 
             // Create ou tournament model
-            TournamentModel tournament = new TournamentModel();
+            TournamentModel tm = new TournamentModel();
 
-            tournament.TournamentName = tournamentNameText.Text;
-            tournament.EntryFee = entryFee;
-            tournament.Prizes = selectedPrizes;
-            tournament.EnteredTeams = selectedTeams;
+            tm.TournamentName = tournamentNameText.Text;
+            tm.EntryFee = entryFee;
+            tm.Prizes = selectedPrizes;
+            tm.EnteredTeams = selectedTeams;
 
             // Wire our matchups
-            TournamentLogic.CreateRounds(tournament);
+            TournamentLogic.CreateRounds(tm);
 
             // Create Tournamaent entry
             // Create all of the prizes entries
             // Create all of the teams entries
-            GlobalConfig.Connection.CreateTournament(tournament);
+            // FIXME: Address issue of 2nd roud's second team when bye exists
+            GlobalConfig.Connection.CreateTournament(tm);
 
+            TournamentViewerForm frm = new TournamentViewerForm(tm);
+            frm.Show();
+            this.Close();
         }
     }
 }

@@ -81,7 +81,7 @@ namespace TrackerLibrary.DataAccess
 
         }
 
-        public void CreateTournament(TournamentModel tournament)
+        public void CreateTournament(TournamentModel model)
         {
             List<TournamentModel> tournaments = GlobalConfig.TournamentsFile
                 .FullFilePath()
@@ -95,14 +95,15 @@ namespace TrackerLibrary.DataAccess
                 currentId = tournaments.OrderByDescending(x => x.Id).First().Id + 1;
             }
 
-            tournament.Id = currentId;
+            model.Id = currentId;
 
-            tournament.SaveRoundsToFile();
+            model.SaveRoundsToFile();
 
-            tournaments.Add(tournament);
+            tournaments.Add(model);
 
             tournaments.SaveToTournamentFile();
 
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
         public List<PersonModel> GetPerson_All()
@@ -123,9 +124,9 @@ namespace TrackerLibrary.DataAccess
                 .ConvertToTournamentModels();
         }
 
-        public void UpdateMatchup(MatchupModel matchup)
+        public void UpdateMatchup(MatchupModel model)
         {
-            matchup.UpdateMatchupToFile();
+            model.UpdateMatchupToFile();
         }
     }
 }

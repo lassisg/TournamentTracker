@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Configuration;
 using TrackerLibrary;
 using TrackerLibrary.Models;
 
@@ -27,12 +19,11 @@ namespace TrackerUI
         {
             loadExistingTournamentDropDown.DataSource = tournaments;
             loadExistingTournamentDropDown.DisplayMember = "TournamentName";
-
         }
 
         private void createTournamentButton_Click(object sender, EventArgs e)
         {
-            TournamentDashboardForm frm = new TournamentDashboardForm();
+            CreateTournamentForm frm = new CreateTournamentForm();
             frm.Show();
         }
 

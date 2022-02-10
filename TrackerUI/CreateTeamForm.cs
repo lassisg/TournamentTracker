@@ -22,7 +22,6 @@ namespace TrackerUI
         {
             InitializeComponent();
 
-            //CreateSampleData();
             callingForm = caller;
             WireUpLists();
         }
@@ -130,14 +129,14 @@ namespace TrackerUI
 
         private void createTeamButton_Click(object sender, EventArgs e)
         {
-            TeamModel team = new TeamModel();
+            TeamModel t = new TeamModel();
 
-            team.TeamName = teamNameText.Text;
-            team.TeamMembers = selectedTeamMembers;
+            t.TeamName = teamNameText.Text;
+            t.TeamMembers = selectedTeamMembers;
 
-            GlobalConfig.Connection.CreateTeam(team);
+            GlobalConfig.Connection.CreateTeam(t);
 
-            callingForm.TeamComplete(team);
+            callingForm.TeamComplete(t);
             this.Close();
         }
     }

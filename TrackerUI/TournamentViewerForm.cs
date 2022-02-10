@@ -19,6 +19,7 @@ namespace TrackerUI
             WireUpLists();
 
             LoadFormData();
+
             LoadRounds();
         }
 
@@ -55,7 +56,7 @@ namespace TrackerUI
 
         private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadMatchups((int)roundDropDown.SelectedIndex);
+            LoadMatchups((int)roundDropDown.SelectedItem);
         }
 
         private void LoadMatchups(int round) 
@@ -69,7 +70,7 @@ namespace TrackerUI
                     {
                         if (m.Winner == null || !unplayedOnlyCheckbox.Checked)
                         {
-                            selectedMatchups.Add(m); 
+                            selectedMatchups.Add(m);
                         }
                     }
                 }
@@ -89,11 +90,11 @@ namespace TrackerUI
 
             teamOneName.Visible = isVisible;
             teamOneScoreLabel.Visible = isVisible;
-            teamOneScoreText.Visible = isVisible;
+            teamOneScoreValue.Visible = isVisible;
 
             teamTwoName.Visible = isVisible;
             teamTwoScoreLabel.Visible = isVisible;
-            teamTwoScoreText.Visible = isVisible;
+            teamTwoScoreValue.Visible = isVisible;
 
             versusLabel.Visible = isVisible;
             scoreButton.Visible = isVisible;
@@ -103,20 +104,20 @@ namespace TrackerUI
         {
             for (int i = 0; i < m.Entries.Count; i++)
             {
-                if  (i == 0)
+                if (i == 0)
                 {
-                    if(m.Entries[0].TeamCompeting != null)
-                    { 
+                    if (m.Entries[0].TeamCompeting != null)
+                    {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
-                        teamOneScoreText.Text = m.Entries[0].Score.ToString();
+                        teamOneScoreValue.Text = m.Entries[0].Score.ToString();
 
                         teamTwoName.Text = "<bye>";
-                        teamTwoScoreText.Text = "0";
+                        teamTwoScoreValue.Text = "0";
                     }
                     else
                     {
                         teamOneName.Text = "Not Yet Set";
-                        teamOneScoreText.Text = "";
+                        teamOneScoreValue.Text = "";
                     }
                 }
 
@@ -125,12 +126,12 @@ namespace TrackerUI
                     if (m.Entries[1].TeamCompeting != null)
                     {
                         teamTwoName.Text = m.Entries[1].TeamCompeting.TeamName;
-                        teamTwoScoreText.Text = m.Entries[1].Score.ToString();
+                        teamTwoScoreValue.Text = m.Entries[1].Score.ToString();
                     }
                     else
                     {
                         teamTwoName.Text = "Not Yet Set";
-                        teamTwoScoreText.Text = "";
+                        teamTwoScoreValue.Text = "";
                     }
                 }
             }
@@ -138,16 +139,61 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // When we clear the bindinglist ("selectedMatchups.Clear();"), in LoadMatchups, it calls this method
+            // with no selected index, wich triggers an exception.
+            // The easier way to fix was adding this if statement to prevent such behavior.
+            if ((MatchupModel)matchupListBox.SelectedItem == null)
+            {
+                return;
+            }
+
             LoadMatchup((MatchupModel)matchupListBox.SelectedItem);
         }
 
         private void unplayedOnlyCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            LoadMatchups((int)roundDropDown.SelectedIndex);
+            LoadMatchups((int)roundDropDown.SelectedItem);
+        }
+
+        private string ValidateData()
+        {
+            string output = "";
+
+            double teamOneScore = 0;
+            double teamTwoScore = 0;
+
+            bool scoreOneValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
+            bool scoreTwoValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
+
+            if (!scoreOneValid)
+            {
+                output = "The Score One value is not a valid number.";
+            }
+            else if (!scoreTwoValid)
+            {
+                output = "The Score Two value is not a valid number.";
+            }
+            else if (teamOneScore == 0 && teamTwoScore == 0)
+            {
+                output = "You did not enter a score for either team.";
+            }
+            else if (teamOneScore == teamTwoScore)
+            {
+                output = "We do not allow ties in this application.";
+            }
+
+            return output;
         }
 
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            string errorMessage = ValidateData();
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show($"Input Error: { errorMessage }");
+                return;
+            }
+
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
             double teamOneScore = 0;
             double teamTwoScore = 0;
@@ -158,7 +204,7 @@ namespace TrackerUI
                 {
                     if (m.Entries[0].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(teamOneScoreText.Text, out teamOneScore);
+                        bool scoreValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
 
                         if (scoreValid)
                         {
@@ -177,7 +223,7 @@ namespace TrackerUI
                 {
                     if (m.Entries[1].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(teamTwoScoreText.Text, out teamTwoScore);
+                        bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
 
                         if (scoreValid)
                         {
@@ -192,40 +238,17 @@ namespace TrackerUI
                 }
             }
 
-            if (teamOneScore > teamTwoScore)
+            try
             {
-                m.Winner = m.Entries[0].TeamCompeting;
+                TournamentLogic.UpdateTournamentResults(tournament);
             }
-            else if (teamTwoScore > teamOneScore)
+            catch (Exception ex)
             {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I do not handle tie games.");
+                MessageBox.Show($"The application had the following error: { ex.Message }");
+                return;
             }
 
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel rm in round)
-                {
-                    foreach (MatchupEntryModel me in rm.Entries)
-                    {
-                        if (me.ParentMatchup.Id != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(rm);
-                            } 
-                        }
-                    }
-                }
-            }
-
-            LoadMatchups((int)roundDropDown.SelectedIndex);
-
-            GlobalConfig.Connection.UpdateMatchup(m);
+            LoadMatchups((int)roundDropDown.SelectedItem);
         }
     }
 }
