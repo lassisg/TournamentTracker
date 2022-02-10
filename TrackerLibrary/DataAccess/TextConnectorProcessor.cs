@@ -3,7 +3,7 @@ using System.Text;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary.DataAccess.TextHelpers
-{
+{ 
     public static class TextConnectorProcessor
     {
         /// <summary>
@@ -641,6 +641,5 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
             return output;
         }
-
     }
 }

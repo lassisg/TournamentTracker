@@ -1,5 +1,5 @@
 namespace TrackerUI
-{
+{ 
     internal static class Program
     {
         /// <summary>
@@ -15,8 +15,6 @@ namespace TrackerUI
             // Initialyze the database connections
             TrackerLibrary.GlobalConfig.InitializeConnections(TrackerLibrary.DatabaseType.Sql);
             Application.Run(new TournamentDashboardForm());
-
-            //Application.Run(new TournamentDashboardForm());
         }
     }
 }

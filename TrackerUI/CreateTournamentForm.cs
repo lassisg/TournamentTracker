@@ -142,6 +142,8 @@ namespace TrackerUI
             // FIXME: Address issue of 2nd roud's second team when bye exists
             GlobalConfig.Connection.CreateTournament(tm);
 
+            tm.AlertUsersToNewRound();
+
             TournamentViewerForm frm = new TournamentViewerForm(tm);
             frm.Show();
             this.Close();

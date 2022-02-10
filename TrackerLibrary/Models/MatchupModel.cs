@@ -1,5 +1,5 @@
-﻿namespace TrackerLibrary.Models
-{
+﻿namespace TrackerLibrary.Models 
+{ 
     /// <summary>
     /// Represents one matchup in the tournament.
     /// </summary>

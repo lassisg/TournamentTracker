@@ -1,5 +1,5 @@
 ﻿namespace TrackerLibrary.Models
-{
+{ 
     /// <summary>
     /// Represents one person.
     /// </summary>

@@ -1,5 +1,5 @@
 ﻿namespace TrackerLibrary.Models
-{
+{ 
     /// <summary>
     /// Represents one team in a matchup.
     /// </summary>
@@ -34,6 +34,5 @@
         /// Represents the matchup that this team came from as the winner.
         /// </summary>
         public MatchupModel? ParentMatchup { get; set; }
-
     }
 }

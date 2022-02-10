@@ -2,7 +2,7 @@
 using TrackerLibrary.DataAccess;
 
 namespace TrackerLibrary
-{
+{ 
     public static class GlobalConfig
     {
         public const string PrizesFile = "PrizeModels.csv";
@@ -38,6 +38,11 @@ namespace TrackerLibrary
         public static string CnnString(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+    
+        public static string AppKeyLookup(string key)
+        {
+            return $"{ ConfigurationManager.AppSettings[key] }";
         }
     }
 }

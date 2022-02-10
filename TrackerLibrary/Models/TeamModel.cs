@@ -1,5 +1,5 @@
 ﻿namespace TrackerLibrary.Models
-{
+{ 
     /// <summary>
     /// Represents a team in the tournament.
     /// </summary>
@@ -19,6 +19,5 @@
         /// The members of the team.
         /// </summary>
         public List<PersonModel> TeamMembers { get; set; } = new List<PersonModel>();
-
     }
 }

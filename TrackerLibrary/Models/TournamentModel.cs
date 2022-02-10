@@ -1,5 +1,5 @@
 ﻿namespace TrackerLibrary.Models
-{
+{ 
     /// <summary>
     /// Represents one tournament, with all the rounds, matchups, prizes and outcomes.
     /// </summary>
@@ -34,6 +34,5 @@
         /// The matchups per round.
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
-
     }
 }

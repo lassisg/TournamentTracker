@@ -2,7 +2,7 @@
 using TrackerLibrary.DataAccess.TextHelpers;
 
 namespace TrackerLibrary.DataAccess
-{
+{ 
     public class TextConnector : IDataConnection
     {
         public void CreatePerson(PersonModel model)
